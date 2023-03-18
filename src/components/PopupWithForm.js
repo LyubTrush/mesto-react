@@ -1,11 +1,11 @@
 import React from "react"
 
 export default function PopupWithForm(props) {
-    
+
     return(
-        <div className={`popup popup_${props.name}`}>
+        <div className={`popup popup_${props.name}` + (props.isOpen && ' popup_opened')}>
         <div className='popup__container'>
-          <button type="button" className='popup__btn-close'></button>
+          <button type="button" className='popup__btn-close' onClick={props.onClose}></button>
           <h2 className='popup__text-profile'>{props.title}</h2>
           <form name={props.name} className={`popup__forma popup__forma-${props.name}`} noValidate>
           {props.children}
