@@ -3,12 +3,15 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 import Main from "./Main.js";
 import PopupWithForm from "./PopupWithForm.js";
+import api from "../utils/Api.js";
+import ImagePopup from "./ImagePopup.js";
 
 function App() {
   //состояния попапов
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   // функции обработчики открытия попапов
   const handleEditAvatarClick = () => {
@@ -23,11 +26,16 @@ function App() {
     setIsAddPlacePopupOpen(true);
   };
 
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+  };
+
   //обработчик закрытия
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setSelectedCard(null);
   };
   return (
     <div>
@@ -40,6 +48,7 @@ function App() {
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
             onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
           />
         </div>
         <div>
@@ -139,33 +148,7 @@ function App() {
           title={"Вы уверены?"}
           submitText={"Да"}
         />
-        //попап просмотра фото
-        <div className="popup popup_img-view">
-          <div className="popup__img-conteiner">
-            <button type="button" className="popup__btn-close"></button>
-            <figure className="popup__figure">
-              <img
-                className="popup__image"
-                src="https://images.unsplash.com/photo-1612470858098-500d3550778e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1268&q=80"
-                alt="alt"
-              />
-              <figcaption className="popup__caption">caption</figcaption>
-            </figure>
-          </div>
-        </div>
-        <template id="template-element">
-          <div className="element">
-            <img className="element__img" />
-            <button className="element__delete"></button>
-            <div className="element__info">
-              <h2 className="element__info-text"></h2>
-              <div className="element__like-card">
-                <button type="button" className="element__info-heart"></button>
-                <span className="element__like-count">0</span>
-              </div>
-            </div>
-          </div>
-        </template>
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </body>
     </div>
   );
