@@ -6,20 +6,24 @@ import React, { useState, useEffect } from "react";
 import Avatar from "../images/Avatar.png";
 import api from "../utils/Api.js";
 import Card from "./Card.js";
+import { CurrentUserContext } from "../context/CurrentUserContext";
 
 export default function Main({
   onEditAvatar,
   onEditProfile,
   onAddPlace,
   onCardClick,
+  cards,
+  onCardLike,
+  onCardDelete,
 }) {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
-
+ // const [userName, setUserName] = useState("");
+ // const [userDescription, setUserDescription] = useState("");
+ // const [userAvatar, setUserAvatar] = useState("");
+  //const [cards, setCards] = useState([]);
+  const currentUser = React.useContext(CurrentUserContext);
   //используем хук useEffect
-  useEffect(() => {
+ /* useEffect(() => {
     api
       .getUserInfo()
       .then((userData) => {
@@ -41,7 +45,7 @@ export default function Main({
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, []);*/
 
   return (
     <main className="content">
@@ -49,7 +53,7 @@ export default function Main({
         <div className="profile__block">
           <img
             className="profile__avatar-image"
-            src={userAvatar ?? Avatar}
+            src={currentUser.avatar}
             //style={{ backgroundImage: `url(${userAvatar})` }}
             alt="аватар"
           />
@@ -59,7 +63,7 @@ export default function Main({
           ></button>
           <div className="profile__info">
             <div className="profile__info-edit">
-              <h1 className="profile__info-title">{userName}</h1>
+              <h1 className="profile__info-title">{currentUser.name}</h1>
               <button
                 type="button"
                 aria-label="Редактировать профиль"
@@ -67,7 +71,7 @@ export default function Main({
                 onClick={onEditProfile}
               ></button>
             </div>
-            <p className="profile__info-subtitle">{userDescription}</p>
+            <p className="profile__info-subtitle">{currentUser.about}</p>
           </div>
         </div>
         <button
@@ -79,7 +83,8 @@ export default function Main({
 
       <section className="elements">
         {cards.map((card) => (
-          <Card card={card} key={card._id} onCardClick={onCardClick} />
+          <Card card={card} key={card._id} onCardClick={onCardClick}  onCardLike={onCardLike}
+          onCardDelete={onCardDelete}/>
         ))}
       </section>
     </main>

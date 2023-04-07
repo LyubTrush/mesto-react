@@ -20,18 +20,18 @@
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        name: userData.username,
-        about: userData.job,
+        name: userData.name,
+        about: userData.about,
       }),
     }).then((res) => this._processingServer(res));
   }
 
-  setAvatar(userData) {
+  setAvatar(link) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: userData.avatarLink,
+        avatar: link,
       }),
     }).then((res) => this._processingServer(res));
   }
@@ -44,13 +44,13 @@
   }
 
   //метод добавления новой карточки
-  addCard(cardData) {
+  addCard({name, link}) {
     return fetch(`${this._baseUrl}cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: cardData.title,
-        link: cardData.link,
+        name,
+        link
       }),
     }).then((res) => this._processingServer(res));
   }
@@ -62,8 +62,8 @@
     }).then((res) => this._processingServer(res));
   }
 
-  likeResolve(cardId, flag) {
-    if (flag === "set") {
+  likeResolve(cardId, isLiked) {
+    if (isLiked === "set") {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: "PUT",
         headers: this._headers,
