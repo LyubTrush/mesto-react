@@ -17,35 +17,7 @@ export default function Main({
   onCardLike,
   onCardDelete,
 }) {
-  // const [userName, setUserName] = useState("");
-  // const [userDescription, setUserDescription] = useState("");
-  // const [userAvatar, setUserAvatar] = useState("");
-  //const [cards, setCards] = useState([]);
   const currentUser = React.useContext(CurrentUserContext);
-  //используем хук useEffect
-  /* useEffect(() => {
-    api
-      .getUserInfo()
-      .then((userData) => {
-        setUserName(userData.name);
-        setUserDescription(userData.description);
-        setUserAvatar(userData.avatar);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((card) => {
-        setCards(card);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);*/
 
   return (
     <main className="content">
@@ -54,7 +26,6 @@ export default function Main({
           <img
             className="profile__avatar-image"
             src={currentUser.avatar}
-            //style={{ backgroundImage: `url(${userAvatar})` }}
             alt="аватар"
           />
           <button

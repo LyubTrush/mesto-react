@@ -1,4 +1,3 @@
-
 export default function ImagePopup({ card, onClose }) {
   return (
     <div className={`popup popup_img-view ${card && "popup_opened"}`}>
