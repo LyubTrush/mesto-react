@@ -17,13 +17,13 @@ export default function Main({
   onCardLike,
   onCardDelete,
 }) {
- // const [userName, setUserName] = useState("");
- // const [userDescription, setUserDescription] = useState("");
- // const [userAvatar, setUserAvatar] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [userDescription, setUserDescription] = useState("");
+  // const [userAvatar, setUserAvatar] = useState("");
   //const [cards, setCards] = useState([]);
   const currentUser = React.useContext(CurrentUserContext);
   //используем хук useEffect
- /* useEffect(() => {
+  /* useEffect(() => {
     api
       .getUserInfo()
       .then((userData) => {
@@ -83,8 +83,13 @@ export default function Main({
 
       <section className="elements">
         {cards.map((card) => (
-          <Card card={card} key={card._id} onCardClick={onCardClick}  onCardLike={onCardLike}
-          onCardDelete={onCardDelete}/>
+          <Card
+            card={card}
+            key={card._id}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
+          />
         ))}
       </section>
     </main>

@@ -1,4 +1,4 @@
- class Api {
+class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
@@ -44,13 +44,13 @@
   }
 
   //метод добавления новой карточки
-  addCard({name, link}) {
+  addCard({ name, link }) {
     return fetch(`${this._baseUrl}cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name,
-        link
+        link,
       }),
     }).then((res) => this._processingServer(res));
   }
@@ -63,7 +63,7 @@
   }
 
   likeResolve(cardId, isLiked) {
-    if (isLiked === "set") {
+    if (isLiked === false) {
       return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: "PUT",
         headers: this._headers,
